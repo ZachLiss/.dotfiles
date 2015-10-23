@@ -17,18 +17,18 @@
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ;; auto-completion
+     auto-completion
      ;; better-defaults
      emacs-lisp
      git
      ;; markdown
-      (shell :variables
-             shell-default-width 30
-             shell-default-position 'right)
-      (auto-completion)
+     (shell :variables
+            shell-default-width 30
+            shell-default-position 'right)
      ;; syntax-checking
      version-control
      html
+     javascript
      org
      )
    ;; List of additional packages that will be installed without being
@@ -167,13 +167,11 @@ layers configuration."
   (setq tab-width 2) ; Set tab width to 2
   ;(setq web-mode-code-indent-offset 2)
   ;(setq web-mode-markup-indent-offset 2)
-
-  (add-hook 'js-mode-hook
-            (lambda()
-              (setq evil-shift-width js-indent-level)))
+  (setq-default js-indent-level 2)
+  (setq-default js2-basic-offset 2)
 
   ;; Git Layer Config
-  magit-repository-directories '("~/Documents/git/")
+  ;;magit-repository-directories '("~/Documents/git/")
 
 )
 
