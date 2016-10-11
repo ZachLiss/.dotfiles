@@ -21,7 +21,7 @@
      ;; better-defaults
      emacs-lisp
      git
-     ;; markdown
+     markdown
      (shell :variables
             shell-default-width 30
             shell-default-position 'right)
@@ -30,6 +30,7 @@
      html
      javascript
      org
+     games
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -158,12 +159,12 @@ before layers configuration."
   ;; User initialization goes here
   )
 
-(defun dotspacemacs/config ()
+(defun dotspacemacs/user-config ()
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
-  (global-linum-mode 1) ; add global linum-mode
-;  (add-hook 'prog-mode-hook 'linum-mode) ; Show line numbers in programming modes
+  ;; (global-linum-mode 1) ; add global linum-mode
+  ;; (add-hook 'prog-mode-hook 'linum-mode) ; Show line numbers in programming modes
   (setq tab-width 2) ; Set tab width to 2
   ;(setq web-mode-code-indent-offset 2)
   ;(setq web-mode-markup-indent-offset 2)
@@ -172,7 +173,13 @@ layers configuration."
 
   ;; Git Layer Config
   ;;magit-repository-directories '("~/Documents/git/")
-
+  (setq-default
+   ;; web-mode
+   css-indent-offset 2
+   web-mode-markup-indent-offset 2
+   web-mode-css-indent-offset 2
+   web-mode-code-indent-offset 2
+   web-mode-attr-indent-offset 2)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
