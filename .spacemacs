@@ -12,12 +12,15 @@
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     yaml
+     csv
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     auto-completion
+     (auto-completion :variables
+                      auto-completion-enable-snippets-in-popup t)
      ;; better-defaults
      emacs-lisp
      git
@@ -28,9 +31,11 @@
      ;; syntax-checking
      version-control
      html
+     typescript
      javascript
      org
      games
+     react
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -169,17 +174,24 @@ layers configuration."
   ;(setq web-mode-code-indent-offset 2)
   ;(setq web-mode-markup-indent-offset 2)
   (setq-default js-indent-level 2)
-  (setq-default js2-basic-offset 2)
+  ;; (setq-default js2-basic-offset 2)
 
   ;; Git Layer Config
   ;;magit-repository-directories '("~/Documents/git/")
   (setq-default
+   ;; js2-mode
+   js2-basic-offset: 2
    ;; web-mode
    css-indent-offset 2
    web-mode-markup-indent-offset 2
    web-mode-css-indent-offset 2
    web-mode-code-indent-offset 2
    web-mode-attr-indent-offset 2)
+
+  (with-eval-after-load 'web-mode
+    (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
+    (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
+    (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
