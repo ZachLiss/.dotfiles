@@ -354,6 +354,10 @@ you should place your code here."
     (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
 
 	;; org-mode
+	(configure-org-mode)
+)
+
+(defun configure-org-mode ()
 	(setq org-default-notes-file "~/Dropbox/org/notes.org")
   (setq org-capture-templates
 		'(
