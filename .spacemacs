@@ -30,7 +30,10 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-	 '(
+		'(php
+			erlang
+			rust
+			yaml
 			auto-completion
 			;; better-defaults
 		  csv
@@ -348,8 +351,23 @@ you should place your code here."
 	(add-hook 'elixir-mode-hook
     (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
 
+	(setq web-mode-engines-alist '(
+			("elixir"    . "\\.html.leex\\'")
+			("elixir"    . "\\.html.eex\\'")
+		))
+
+	;; (setq alchemist-mix-command "~/.asdf/shims/mix")
+
 	;; org-mode
 	(configure-org-mode)
+
+	;; elixir config
+	(setq alchemist-mix-command "~/.asdf/shims/mix")
+	;; (setq alchemist-mix-command  (string-trim-right (shell-command-to-string "asdf which mix")))
+	(eval-after-load "elixir-mode"
+		'(defun elixir-format--mix-executable ()
+			 (string-trim-right (shell-command-to-string "asdf which mix"))))
+
 )
 
 (defun configure-org-mode ()
@@ -466,8 +484,8 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(clean-aindent-mode t)
- '(package-selected-packages
-   '(ox-twbs web-mode web-beautify tagedit slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake pug-mode ob-elixir minitest markdown-toc markdown-mode livid-mode skewer-mode simple-httpd json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js-doc helm-css-scss haml-mode gh-md flycheck-mix flycheck-credo flycheck emmet-mode chruby bundler inf-ruby alchemist company elixir-mode mmm-mode json-mode js2-mode coffee-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))
+	'(package-selected-packages
+		 '(phpunit phpcbf php-extras php-auto-yasnippets helm-gtags ggtags drupal-mode counsel-gtags counsel swiper ivy company-php ac-php-core xcscope php-mode web-mode web-beautify tagedit slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake pug-mode ob-elixir minitest markdown-toc markdown-mode livid-mode skewer-mode simple-httpd json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js-doc helm-css-scss haml-mode gh-md flycheck-mix flycheck-credo flycheck emmet-mode chruby bundler inf-ruby alchemist company elixir-mode mmm-mode json-mode js2-mode coffee-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))
  '(standard-indent 2))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
